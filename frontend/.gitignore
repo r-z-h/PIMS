@@ -1,0 +1,11 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+.DS_Store
+
+# Playwright 产物（可随时用 npm run test:ui 重新生成）
+test-results
+playwright-report
+blob-report

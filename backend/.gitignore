@@ -1,0 +1,13 @@
+# 虚拟环境不入库
+.venv/
+venv/
+# 运行期数据：SQLite 数据库、WAL、备份
+data/
+*.db
+*.db-wal
+*.db-shm
+# Python 缓存
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/

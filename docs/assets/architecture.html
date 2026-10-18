@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title>PIMS 体系结构图</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 1240px;
+    padding: 28px 30px 22px;
+    background: #ffffff;
+    font-family: "Microsoft YaHei", "Segoe UI", Arial, sans-serif;
+    color: #1f2328;
+  }
+  .head { text-align: center; padding-bottom: 14px; border-bottom: 2px solid #1f2328; margin-bottom: 18px; }
+  .head h1 { font-size: 25px; letter-spacing: .5px; }
+  .head p { font-size: 12.5px; color: #6b7280; margin-top: 5px; }
+
+  .layer { border: 1.6px solid #cfd6dd; border-radius: 10px; margin-bottom: 12px; overflow: hidden; }
+  .layer > .bar {
+    padding: 7px 14px; font-size: 13.5px; font-weight: 700; color: #fff;
+    display: flex; justify-content: space-between; align-items: baseline;
+  }
+  .bar small { font-weight: 400; font-size: 11.5px; opacity: .9; }
+  .body { padding: 12px 14px; background: #fbfcfd; }
+
+  .l-user   > .bar { background: #6b7280; }
+  .l-front  > .bar { background: #1677ff; }
+  .l-back   > .bar { background: #0f9d8f; }
+  .l-data   > .bar { background: #7c3aed; }
+
+  .grid { display: flex; gap: 9px; flex-wrap: wrap; }
+  .box {
+    flex: 1 1 0; min-width: 0; background: #fff; border: 1px solid #d8dee4;
+    border-radius: 7px; padding: 9px 10px;
+  }
+  .box.wide { flex: 2 1 0; }
+  .box .t { font-size: 12.8px; font-weight: 700; margin-bottom: 5px; }
+  .box .d { font-size: 11.3px; color: #6b7280; line-height: 1.55; }
+  .box .mono { font-family: Consolas, "Courier New", monospace; font-size: 10.8px; color: #0f766e; }
+
+  .userbox { display: flex; gap: 9px; }
+  .userbox .box { text-align: center; }
+
+  .flow {
+    margin: 10px 0 14px; padding: 11px 14px; border: 1.6px dashed #f59e0b;
+    border-radius: 9px; background: #fffbeb;
+  }
+  .flow .cap { font-size: 13.5px; font-weight: 700; color: #b45309; margin-bottom: 9px; }
+  .steps { display: flex; align-items: stretch; gap: 7px; }
+  .step {
+    flex: 1 1 0; background: #fff; border: 1px solid #fcd34d; border-radius: 7px;
+    padding: 8px 9px; font-size: 11.4px; line-height: 1.5;
+  }
+  .step b { display: block; font-size: 12px; color: #92400e; margin-bottom: 3px; }
+  .arrow { align-self: center; color: #d97706; font-size: 17px; font-weight: 700; padding: 0 1px; }
+
+  .rules { border: 1.6px solid #dbeafe; border-radius: 10px; background: #f5f9ff; padding: 11px 14px; }
+  .rules .cap { font-size: 13.5px; font-weight: 700; color: #1d4ed8; margin-bottom: 8px; }
+  .rules .row { display: flex; gap: 9px; flex-wrap: wrap; }
+  .rule {
+    flex: 1 1 0; min-width: 220px; background: #fff; border: 1px solid #bfdbfe;
+    border-radius: 7px; padding: 8px 10px; font-size: 11.6px; line-height: 1.5;
+  }
+  .rule b { color: #1d4ed8; }
+  .rule.warn { border-color: #fecaca; background: #fff7f7; }
+  .rule.warn b { color: #b91c1c; }
+
+  .foot { margin-top: 12px; font-size: 11px; color: #9ca3af; text-align: right; }
+</style>
+</head>
+<body>
+
+  <div class="head">
+    <h1>工程企业项目成本管理系统 · 体系结构图</h1>
+    <p>单机单用户 · 本地 Web 应用 · 一套数据两处入口 · 收付流水不参与利润</p>
+  </div>
+
+  <!-- 使用者 -->
+  <div class="layer l-user">
+    <div class="bar"><span>使用者</span><small>一人一机，不做协同与权限</small></div>
+    <div class="body">
+      <div class="userbox">
+        <div class="box"><div class="t">老板（唯一使用者）</div><div class="d">一个密码进入系统；首次登录强制设 3 个密保问题</div></div>
+        <div class="box"><div class="t">使用方式</div><div class="d">双击 <span class="mono">start.bat</span> → 浏览器自动打开 <span class="mono">127.0.0.1:8000</span></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 前端 -->
+  <div class="layer l-front">
+    <div class="bar"><span>前端层 · 展示与交互</span><small>Vite + React 18 + TypeScript + Ant Design</small></div>
+    <div class="body">
+      <div class="grid">
+        <div class="box wide">
+          <div class="t">页面（9 个菜单）</div>
+          <div class="d">
+            首页（项目盈亏总表）· 项目档案 / 项目详情 · <b>记账</b>（五类成本录入）· <b>收/付款</b>（资金流水）·
+            <b>成本</b>（按构成汇总，也可录入）· 往来（应收 / 应付）· 库存 · 结算（人工）· 设置
+          </div>
+        </div>
+        <div class="box">
+          <div class="t">公共组件</div>
+          <div class="d">金额输入 / 金额展示（整数分运算，无浮点漂移）· 字典下拉（可现场新增、对方可直接输入）· 变更记录时间线 · 冲销弹窗 · 登记已付弹窗</div>
+        </div>
+      </div>
+      <div class="grid" style="margin-top:9px">
+        <div class="box">
+          <div class="t">状态与缓存</div>
+          <div class="d">Zustand：登录态 / 当前项目 / 时间段 / 字典缓存</div>
+        </div>
+        <div class="box">
+          <div class="t">接口调用</div>
+          <div class="d">axios 统一封装：<span class="mono">{code,message,data}</span> 信封 · 401 收敛跳登录 · 会话失效闩锁</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 后端 -->
+  <div class="layer l-back">
+    <div class="bar"><span>后端层 · 业务规则唯一实现处</span><small>Python + FastAPI + SQLAlchemy</small></div>
+    <div class="body">
+      <div class="grid">
+        <div class="box">
+          <div class="t">接入与安全</div>
+          <div class="d">登录 / 会话 Cookie · 密保问题 · 统一响应信封与错误码 · 变更日志（谁在什么时候改了什么）</div>
+        </div>
+        <div class="box wide">
+          <div class="t">业务服务（规则只在这里实现一次）</div>
+          <div class="d">
+            项目与盈亏计算 · 五类成本（人工 / 材料 / 机械 / 杂费 / 垫付）· 材料采购联动库存 ·
+            <b>成本 ↔ 应付单联动</b> · 资金收付 · 应收应付与冲销 · 人工结算 · 汇总与 Excel 导出
+          </div>
+        </div>
+        <div class="box">
+          <div class="t">静态托管</div>
+          <div class="d">同时把前端页面发给浏览器，所以<b>只有一个启动入口</b>，不需要单独起前端服务</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 数据 -->
+  <div class="layer l-data">
+    <div class="bar"><span>数据层 · 单文件数据库</span><small>SQLite（backend/data/pims.db，拷走即搬迁）</small></div>
+    <div class="body">
+      <div class="grid">
+        <div class="box">
+          <div class="t">主数据</div>
+          <div class="d">项目档案（甲方预算 / 我方成本预算）· 字典项（杂费小类 / 材料 / 单位 / 对方）</div>
+        </div>
+        <div class="box">
+          <div class="t">成本（一份数据两个入口）</div>
+          <div class="d">成本主表 + 人工工天 / 材料采购 / 机械台班 / 垫付明细</div>
+        </div>
+        <div class="box">
+          <div class="t">资金与往来</div>
+          <div class="d">资金收付流水 · 应收应付单 · 冲销记录 · 人工结算单</div>
+        </div>
+        <div class="box">
+          <div class="t">库存与留痕</div>
+          <div class="d">库存余量（按项目隔离）· 库存流水（入库 / 领用）· 变更日志 · 启动自动备份（留 7 份）</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 核心机制 -->
+  <div class="flow">
+    <div class="cap">核心机制：录一笔账，系统同时做三件事</div>
+    <div class="steps">
+      <div class="step"><b>① 录成本</b>在「记账」或「成本」页录一笔（人工 / 材料 / 机械 / 杂费 / 垫付）</div>
+      <div class="arrow">→</div>
+      <div class="step"><b>② 自动生成应付单</b>同一时刻生成「我欠谁多少」，金额＝成本全额，并关联该笔成本</div>
+      <div class="arrow">→</div>
+      <div class="step"><b>③ 顺手登记已付</b>弹窗填已付金额（选填）→ 生成付款流水并自动冲销该应付单</div>
+      <div class="arrow">→</div>
+      <div class="step"><b>结果</b>应付单状态：未收付 → 部分 → 已结清；付款流水在「收/付款」页可见</div>
+    </div>
+  </div>
+
+  <!-- 口径 -->
+  <div class="rules">
+    <div class="cap">不得擅改的口径（代码与文档必须一致）</div>
+    <div class="row">
+      <div class="rule"><b>实际成本</b>＝ 人工 + 材料 + 机械 + 杂费 + 垫付（五类之和）</div>
+      <div class="rule"><b>预计利润</b>＝ 甲方预算 − 我方成本预算</div>
+      <div class="rule"><b>结算利润</b>＝ 甲方预算 − 实际成本</div>
+      <div class="rule warn"><b>资金收付与应收应付一律不参与利润计算</b>；系统不提供「现金结余」</div>
+    </div>
+    <div class="row" style="margin-top:9px">
+      <div class="rule">材料：<b>采购即成本</b>并同时入库；<b>领用只减库存、不再扣一次成本</b></div>
+      <div class="rule">人工：按工天<b>实时入成本</b>；项目结束的结算只做汇总与发放，<b>不重复计入</b></div>
+      <div class="rule">成本改金额 → 应付单实时同步；<b>已冲销则拒绝改</b>，需先撤销冲销</div>
+      <div class="rule">删除成本 → <b>应付单保留</b>，只提示不自动删</div>
+    </div>
+  </div>
+
+  <div class="foot">工程企业项目成本管理系统 · 体系结构（单机本地 Web）</div>
+
+</body>
+</html>
