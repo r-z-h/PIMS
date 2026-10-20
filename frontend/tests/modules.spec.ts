@@ -28,7 +28,7 @@ test.describe('模块分工与成本页', () => {
     const labels = await page.locator('.ant-menu-item').allInnerTexts();
     const normalized = labels.map((t) => t.replace(/\s+/g, ''));
     expect(normalized, `实际菜单：${normalized.join(' | ')}`).toEqual([
-      '首页', '项目', '记账', '收/付款', '成本', '往来', '库存', '结算', '设置',
+      '首页', '项目', '记账', '收/付款', '成本', '往来', '库存', '结算', '快速查询', '设置',
     ]);
   });
 

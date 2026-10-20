@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+﻿import { expect, test } from '@playwright/test';
 import { gotoMenu, login, pickProject } from './helpers';
 
 /**
@@ -68,12 +68,12 @@ test.describe('项目详情与顶部筛选', () => {
     expect(before).not.toBe('0.00');
 
     // mock 的项目 1 成本都在 2026-05；点「本月」（now）应筛成 0
-    await page.locator('.pims-header a', { hasText: '本月' }).first().click();
+    await page.locator('.pims-toolbar a', { hasText: '本月' }).first().click();
     await page.waitForTimeout(1000);
     expect(await actualCost(), '切到本月后应重新取数（mock 数据不在本月，应为 0.00）').toBe('0.00');
 
     // 点「全部」恢复
-    await page.locator('.pims-header a', { hasText: '全部' }).first().click();
+    await page.locator('.pims-toolbar a', { hasText: '全部' }).first().click();
     await page.waitForTimeout(1000);
     expect(await actualCost(), '改回全部应恢复全部数据').toBe(before);
   });

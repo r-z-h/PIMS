@@ -1,4 +1,4 @@
-"""附录：文件地图 / 命令速查 / 一页纸审查表 / 中英对照。"""
+﻿"""附录：文件地图 / 命令速查 / 一页纸审查表 / 中英对照。"""
 
 BLOCKS = [
     ("pagebreak",),
@@ -36,7 +36,7 @@ BLOCKS = [
          ["hooks/", "useDateRange、useDict、useProject、useEnterToConfirm（回车确认）"],
          ["utils/money.ts", "**金额计算唯一入口**（整数分）"],
          ["types/domain.ts", "所有数据类型定义"],
-         ["tests/", "浏览器测试，68 项"],
+         ["tests/", "浏览器测试，72 项"],
      ],
      [4.6, 11.4]),
 

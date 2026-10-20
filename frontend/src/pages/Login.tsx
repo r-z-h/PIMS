@@ -238,7 +238,8 @@ export default function Login({ mode }: LoginProps) {
                 message="当前仍是初始密码 123456，登录后请在设置页修改"
               />
             )}
-            <Form layout="vertical" onFinish={handleLogin} initialValues={{ password: '123456' }}>
+            {/* 不再预填默认密码（2026-10-20）：公开仓库里把 123456 写进登录框等于把默认口令明示出去 */}
+            <Form layout="vertical" onFinish={handleLogin}>
               <Form.Item
                 label="登录密码"
                 name="password"

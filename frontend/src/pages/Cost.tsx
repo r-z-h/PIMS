@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Card, Dropdown, Space, Table, Tag, Tooltip, Typography } from 'antd';
 import { AccountBookOutlined, PlusOutlined, ReloadOutlined, RightOutlined } from '@ant-design/icons';
 import type { ColumnsType } from 'antd/es/table';
@@ -264,7 +264,6 @@ export default function Cost() {
   return (
     <div className="pims-page">
       <PageToolbar
-        showProject
         showDateRange
         dateRange={dateRange}
         onDateRangeChange={setDateRange}

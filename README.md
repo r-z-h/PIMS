@@ -1,4 +1,4 @@
-# PIMS — 工程企业项目成本管理系统
+﻿# PIMS — 工程企业项目成本管理系统
 
 > 原名《基于大模型的工程企业预算-记账-结算一体化管理系统》。
 > 经需求对齐后，大模型（AI 问答 / RAG / 科目推荐）、审批流、复式记账、权限体系、预算编制、进度款多级审批等一律不做。
@@ -131,7 +131,7 @@ node frontend/scripts/real-backend-e2e.mjs
 | 套件 | 命令 | 结果 |
 |---|---|---|
 | 后端单元/接口测试 | `cd backend && .venv\Scripts\python.exe -m pytest -q` | **146 passed** |
-| Playwright 交互/组件/溢出/精度/模块/关联成本/自动冲销/五类结算/表头吸顶/完工锁 | `cd frontend && npm run test:ui` | **68 passed**（自带 mock server，无需后端） |
+| Playwright 交互/组件/溢出/精度/模块/关联成本/自动冲销/五类结算/表头吸顶/完工锁/侧边栏固定 | `cd frontend && npm run test:ui` | **72 passed**（自带 mock server，无需后端） |
 | 打包态冒烟（`start.bat` 那条路径） | `node frontend/scripts/smoke-packaged.mjs` | **17 项通过** |
 | 成本↔应付单联动（真后端端到端） | `node scripts/verify-payable-link.mjs` | **21 项通过** |
 | 端到端冒烟（接口级） | `scripts/integration_smoke.py http://127.0.0.1:8000` | **26 项通过** |

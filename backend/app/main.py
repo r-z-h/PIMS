@@ -19,7 +19,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from . import config
-from .api import arap, auth, costs, dashboard, export, funds, inventory, labor, logs, projects, settings, system
+from .api import arap, auth, costs, dashboard, export, funds, inventory, labor, logs, projects, query, settings, system
 from .db import init_db
 from .utils.response import EnvelopeJSONResponse, ok, register_exception_handlers
 
@@ -106,6 +106,7 @@ def create_app() -> FastAPI:
         dashboard.router,
         export.router,
         logs.router,
+        query.router,
         system.router,
     ):
         app.include_router(router)

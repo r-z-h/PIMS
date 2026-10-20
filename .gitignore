@@ -33,3 +33,9 @@ desktop.ini
 
 # ---- 文档（本地保留，不随仓库发布） ----
 *.docx
+
+# ---- 一次性简历检查脚本（本地工具，不提交） ----
+scripts/inspect_resume_template.py
+scripts/inspect_resume_tables.py
+scripts/verify_resume.py
+scripts/build_resume_pims.py

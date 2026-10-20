@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Alert,
   Button,
@@ -314,7 +314,6 @@ export default function Inventory() {
   return (
     <div className="pims-page">
       <PageToolbar
-        showProject
         allowAllProjects={false}
         showDateRange
         dateRange={dateRange}

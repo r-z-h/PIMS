@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useState } from 'react';
 import {
   Button,
   Card,
@@ -136,7 +136,6 @@ export default function ArAp() {
   return (
     <div className="pims-page">
       <PageToolbar
-        showProject
         showDateRange
         dateRange={dateRange}
         onDateRangeChange={setDateRange}

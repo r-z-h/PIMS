@@ -33,6 +33,8 @@ export function ProjectSelect({
       placeholder={placeholder}
       value={value ?? null}
       optionFilterProp="label"
+      // 统一的类名：便于断言「同一个筛选只出现一次」（tests/filtersonce.spec.ts）
+      className={['pims-project-select', rest.className].filter(Boolean).join(' ')}
       style={{ minWidth: 180, ...rest.style }}
       options={merged}
       onChange={(next) => onChange?.(next ?? null)}

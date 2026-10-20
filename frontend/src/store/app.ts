@@ -113,19 +113,28 @@ function readProjectId(): number | null {
   return Number.isFinite(value) && value > 0 ? value : null;
 }
 
+function defaultRange(): DateRange {
+  // 默认今年（docs/01-开发手册.md 5.2）
+  const year = new Date().getFullYear();
+  return { start_date: `${year}-01-01`, end_date: `${year}-12-31` };
+}
+
 function readRange(): DateRange {
   const raw = window.localStorage.getItem(RANGE_KEY);
   if (raw !== null) {
     try {
       const parsed = JSON.parse(raw) as DateRange;
-      return { start_date: parsed.start_date, end_date: parsed.end_date };
+      // 空值（用户点过「全部」）不保留：刷新后回到「今年」，
+      // 否则日期框空着会被当成「筛选失效」（2026-10-19 用户反馈）
+      if (parsed.start_date && parsed.end_date) {
+        return { start_date: parsed.start_date, end_date: parsed.end_date };
+      }
+      return defaultRange();
     } catch {
       /* 解析失败则回落到默认今年 */
     }
   }
-  // 默认今年（docs/01-开发手册.md 5.2）
-  const year = new Date().getFullYear();
-  return { start_date: `${year}-01-01`, end_date: `${year}-12-31` };
+  return defaultRange();
 }
 
 function readShowDeleted(): boolean {

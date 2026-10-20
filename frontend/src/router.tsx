@@ -14,6 +14,7 @@ import Cost from './pages/Cost';
 import ArAp from './pages/ArAp';
 import Inventory from './pages/Inventory';
 import LaborSettle from './pages/LaborSettle';
+import QuickQuery from './pages/QuickQuery';
 import Settings from './pages/Settings';
 import Login from './pages/Login';
 
@@ -118,6 +119,7 @@ export const routes = [
           { path: 'arap', element: <ArAp /> },
           { path: 'inventory', element: <Inventory /> },
           { path: 'labor-settle', element: <LaborSettle /> },
+          { path: 'quick-query', element: <QuickQuery /> },
           { path: 'settings', element: <Settings /> },
           // 旧地址兼容：改名前的 /ledger（旧「记账」）
           { path: 'ledger', element: <Navigate to="/payments" replace /> },

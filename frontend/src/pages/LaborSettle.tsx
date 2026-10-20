@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import {
   Alert,
@@ -549,7 +549,6 @@ export default function LaborSettle() {
   return (
     <div className="pims-page">
       <PageToolbar
-        showProject
         allowAllProjects={false}
         showDateRange
         dateRange={dateRange}

@@ -58,6 +58,26 @@ body {
   box-shadow: inset 3px 0 0 #faad14;
 }
 
+/* 左侧菜单固定，不随页面滚动跑掉（2026-10-18 用户反馈） */
+.ant-layout-sider {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 30;
+}
+
+/* 侧边栏脱离文档流后，右侧内容要让出 180px（收起时 64px，对应 antd 的 lg 断点） */
+.ant-layout-sider + .ant-layout {
+  margin-left: 180px;
+}
+
+.ant-layout-sider-collapsed + .ant-layout {
+  margin-left: 64px;
+}
+
 .pims-layout-logo {
   display: flex;
   align-items: center;

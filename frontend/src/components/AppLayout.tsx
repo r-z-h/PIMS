@@ -9,6 +9,7 @@ import {
   PayCircleOutlined,
   PieChartOutlined,
   ProjectOutlined,
+  SearchOutlined,
   SettingOutlined,
   SwapOutlined,
   TeamOutlined,
@@ -16,7 +17,6 @@ import {
 } from '@ant-design/icons';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import ProjectSelect from './ProjectSelect';
-import DateRangeBar from './DateRangeBar';
 import ProjectLockGate from './ProjectLockGate';
 import { authApi } from '../api/auth';
 import { USE_MOCK } from '../api/client';
@@ -34,17 +34,23 @@ const MENU_ITEMS = [
   { key: '/arap', icon: <SwapOutlined />, label: '往来' },
   { key: '/inventory', icon: <DatabaseOutlined />, label: '库存' },
   { key: '/labor-settle', icon: <TeamOutlined />, label: '结算' },
+  { key: '/quick-query', icon: <SearchOutlined />, label: '快速查询' },
   { key: '/settings', icon: <SettingOutlined />, label: '设置' },
 ];
 
-/** 全局布局：左侧菜单 + 顶部当前项目选择器 + 时间段选择器（位置固定） */
+/**
+ * 全局布局：左侧菜单 + 顶部「当前项目」选择器。
+ *
+ * 时间段选择器**不在这里**（2026-10-19 用户反馈后收敛）：
+ * 每个列表页的工具栏里都有一个，且顶部这个不吸顶、页面一滚就看不见，
+ * 两份绑同一份状态 → 用户看到两个一样的框，认为是多余的。
+ * 现在「项目」只在顶部，「时间段」只在页面工具栏，每个维度只有一个入口。
+ */
 export default function AppLayout() {
   const navigate = useNavigate();
   const location = useLocation();
   const currentProjectId = useAppStore((s) => s.currentProjectId);
   const setCurrentProjectId = useAppStore((s) => s.setCurrentProjectId);
-  const dateRange = useAppStore((s) => s.dateRange);
-  const setDateRange = useAppStore((s) => s.setDateRange);
   const reset = useAppStore((s) => s.reset);
 
   // 全局回车确认（2026-10-16 需求）：弹窗里按回车 = 点主按钮；搜索框里按回车 = 搜索
@@ -95,7 +101,6 @@ export default function AppLayout() {
               style={{ minWidth: 200 }}
               onChange={(id) => setCurrentProjectId(id)}
             />
-            <DateRangeBar value={dateRange} onChange={setDateRange} />
           </Space>
           <div className="pims-header-user">
             {USE_MOCK && (

@@ -1,4 +1,4 @@
-import { expect, test } from '@playwright/test';
+﻿import { expect, test } from '@playwright/test';
 import { login, pickProject } from './helpers';
 
 /**
@@ -36,7 +36,7 @@ test.describe('项目列表筛选', () => {
     await expect(page.getByText('日期筛：有业务数据')).toBeVisible();
 
     // 切到「本月」（mock 数据都在 2026-05，本月没有任何业务）→ 应该一条都不剩
-    await page.locator('.pims-header a', { hasText: '本月' }).first().click();
+    await page.locator('.pims-toolbar a', { hasText: '本月' }).first().click();
     await page.waitForTimeout(1200);
 
     await expect(page.locator('.ant-table-row')).toHaveCount(0);
@@ -50,7 +50,7 @@ test.describe('项目列表筛选', () => {
     await expect(page.locator('.ant-table-row').first()).toBeVisible({ timeout: 20_000 });
 
     // 先切到本月（无业务数据）→ 用「有业务数据」口径应该是空的
-    await page.locator('.pims-header a', { hasText: '本月' }).first().click();
+    await page.locator('.pims-toolbar a', { hasText: '本月' }).first().click();
     await page.waitForTimeout(1000);
     await expect(page.locator('.ant-table-row')).toHaveCount(0);
 
@@ -61,7 +61,7 @@ test.describe('项目列表筛选', () => {
     await expect(page.locator('.ant-table-row')).toHaveCount(0);
 
     // 换成「全部」再切回「有业务数据」→ 全部项目回来
-    await page.locator('.pims-header a', { hasText: '全部' }).first().click();
+    await page.locator('.pims-toolbar a', { hasText: '全部' }).first().click();
     await page.waitForTimeout(1000);
     await page.locator('.ant-select').filter({ hasText: /日期筛/ }).first().click();
     await page.locator('.ant-select-dropdown:visible .ant-select-item-option').filter({ hasText: '有业务数据' }).first().click();
@@ -75,7 +75,7 @@ test.describe('项目列表筛选', () => {
     await expect(page.locator('.ant-table-row').first()).toBeVisible({ timeout: 20_000 });
 
     // 切到本月 → 项目列表空（有业务数据口径）
-    await page.locator('.pims-header a', { hasText: '本月' }).first().click();
+    await page.locator('.pims-toolbar a', { hasText: '本月' }).first().click();
     await page.waitForTimeout(1000);
     await expect(page.locator('.ant-table-row')).toHaveCount(0);
 

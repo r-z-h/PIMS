@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+﻿import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Button, Card, Input, Modal, Space, Tabs, Tag, Typography, message } from 'antd';
 import { DeleteOutlined, EditOutlined, FileSearchOutlined, PlusOutlined, ReloadOutlined } from '@ant-design/icons';
@@ -296,7 +296,6 @@ export default function Bookkeeping() {
   return (
     <div className="pims-page">
       <PageToolbar
-        showProject
         showDateRange
         dateRange={dateRange}
         onDateRangeChange={setDateRange}
